@@ -1,4 +1,5 @@
 function consulta_autorizaciones(){
+    alert("Bienvenido a la plataforma de pedidos de medicamentos de la farmacia del Hospital Britanico")
     let estado = true
     let respuesta 
     while (estado){
@@ -58,7 +59,6 @@ function consulta_autorizaciones(){
     
 }
 
-alert("Bienvenido a la plataforma de pedidos de medicamentos de la farmacia del Hospital Britanico")
 consulta_autorizaciones()
 
 
