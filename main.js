@@ -49,6 +49,8 @@ function generadorPedido(){
     }
 
     // ------------------------------------------ //
+    // El sistema inicia sin usuarios pre-registrados. Tras crear un nuevo usuario, el sistema verifica su existencia. 
+    // Si la creación fue exitosa, el sistema permite el acceso utilizando el número de DNI del usuario registrado.
     alert("Bienvenidos a Genesis2815 Store")
     while(true){
         cuantaUsuarioExistente = prompt("Tiene cuenta en nuestra tienda? SI / NO")
