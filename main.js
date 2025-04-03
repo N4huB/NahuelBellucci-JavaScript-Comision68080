@@ -1,366 +1,311 @@
-function generadorPedido(){
-        // ------------------ Variables de ingreso --------------------//
-    let cuantaUsuarioExistente
-    let dniUsuario
-    let usuarioEncontrado
-    let estadoUsuario = false
-    let consultaRegistro
+// ############################ CONTENEDOR HEADER ############################# //
+const contHeader = document.getElementById("header");
+contHeader.style.display = "flex";
+contHeader.style.flexDirection = "column";
+contHeader.style.alignItems = "center";
 
-    // ----------- Variables de seleccion de productos ----------- //
-    let numeroIngresado
-    let agregarProducto
-    let cantidadProducto
-    let precioTotal
-    let totalCompra = 0
-    const carritoCompras = []
-    let cantidad
-    let consulta
+// --------------------------- TITULO PRINCIPAL ------------------------------- //
+const tituloPrincipal = document.createElement("h1");
+tituloPrincipal.textContent = "Genesis2815 STORE";
+tituloPrincipal.style.marginBottom = "150px";
 
-    // ----------- Variables de confirmacion de pedido ----------- //
-    let confirmacionPedido
+contHeader.appendChild(tituloPrincipal);
 
-    let estadoPrograma = true
-    // ------------- Lista de clientes -------------//
-    const clientes = []
+// ########################### CONTENEDOR MAIN ################################ //
+const contMain = document.getElementById("main");
+contMain.style.display = "flex";
+contMain.style.flexDirection = "column";
+contMain.style.alignItems = "center";
 
-    // ------------------------------------------ //
+// ####################### CONTENEDOR SALUDO INICIAL ########################## //
+const contInicial = document.createElement("div");
+contInicial.style.display = "flex";
+contInicial.style.flexDirection = "column";
+contInicial.style.alignItems = "center";
 
-    // ---------------- Funciones -----------------//
-    function consultarUsuario(numeroDni, listaClientes){
-        for (let i = 0; i < listaClientes.length; i++) {
-            if (listaClientes[i].dni === numeroDni) {
-                return listaClientes[i];
-            }
-        }
-        return null;
-    }
-    function agregarUsuario() {
+// -------------------------- MENSAJE BIENVENIDA ------------------------------ //
+const mensajeBienvenida = document.createElement("p");
+mensajeBienvenida.textContent = "Bienvenido a Genesis2915 Store";
+mensajeBienvenida.style.marginBottom = "50px";
+contInicial.appendChild(mensajeBienvenida);
+
+// ---------------------------- BOTON INGRESAR -------------------------------- //
+const botonIngresar = document.createElement("button");
+botonIngresar.textContent = "Ingresar";
+contInicial.appendChild(botonIngresar);
+
+botonIngresar.addEventListener("click", () =>{
+    mensajeBienvenida.remove();
+    botonIngresar.remove();
+    contConsultaCuenta.style.display = "Flex";
+})
+
+contMain.appendChild(contInicial);
+
+// ####################### CONTENEDOR CONSULTA CUENTA ######################### //
+const contConsultaCuenta = document.createElement("div");
+contConsultaCuenta.style.display = "none";
+contConsultaCuenta.style.flexDirection = "column";
+contConsultaCuenta.style.alignItems = "center";
+
+// ------------------------ MENSAJE CONSULTA CUENTA --------------------------- //
+const consultaCuenta = document.createElement("p");
+consultaCuenta.textContent = "¿Tenes una cuenta en nuestra pagina?";
+consultaCuenta.style.marginBottom = "50px";
+contConsultaCuenta.appendChild(consultaCuenta);
+
+// ---------------------------- BOTON CUENTA SI ------------------------------- //
+const botonCuentaSi = document.createElement("button");
+botonCuentaSi.textContent = "Si";
+botonCuentaSi.style.width = "40px";
+botonCuentaSi.style.marginBottom = "10px";
+contConsultaCuenta.appendChild(botonCuentaSi);
+
+botonCuentaSi.addEventListener("click", () => {
+    consultaCuenta.remove();
+    botonCuentaSi.remove();
+    botonCuentaNo.remove();
+    contCuentaCreada.style.display = "flex";
+})
+
+// ---------------------------- BOTON CUENTA NO ------------------------------- //
+const botonCuentaNo = document.createElement("button");
+botonCuentaNo.textContent = "No";
+botonCuentaNo.style.width = "40px";
+contConsultaCuenta.appendChild(botonCuentaNo);
+botonCuentaNo.addEventListener("click", () => {
+    consultaCuenta.remove();
+    botonCuentaSi.remove();
+    botonCuentaNo.remove();
+    contConsultaCrearCuenta.style.display = "flex";
+})
+
+contMain.appendChild(contConsultaCuenta);
+
+// #################### CONTENEDOR CONSULTA CREAR CUENTA ###################### //
+const contConsultaCrearCuenta = document.createElement("div");
+contConsultaCrearCuenta.style.display = "none";
+contConsultaCrearCuenta.style.flexDirection = "column";
+contConsultaCrearCuenta.style.alignItems = "center";
+
+// --------------------- MENSAJE CONSULTA CREAR CUENTA ------------------------ //
+const consultaCrearCuenta = document.createElement("p");
+consultaCrearCuenta.textContent = "¿Queres crear una cuenta?";
+consultaCrearCuenta.style.marginBottom = "50px";
+contConsultaCrearCuenta.appendChild(consultaCrearCuenta);
+
+// ------------------------ BOTON CREAR CUENTA SI ----------------------------- //
+const botonCrearCuentaSi = document.createElement("button");
+botonCrearCuentaSi.textContent = "Si";
+botonCrearCuentaSi.style.width = "40px";
+botonCrearCuentaSi.style.marginBottom = "10px";
+contConsultaCrearCuenta.appendChild(botonCrearCuentaSi);
+
+botonCrearCuentaSi.addEventListener("click", () => {
+    consultaCrearCuenta.remove();
+    botonCrearCuentaSi.remove();
+    botonCrearCuentaNo.remove();
+    contCrearCuenta.style.display = "flex";
+})
+
+// ------------------------ BOTON CREAR CUENTA NO ----------------------------- //
+const botonCrearCuentaNo = document.createElement("button");
+botonCrearCuentaNo.textContent = "No";
+botonCrearCuentaNo.style.width = "40px";
+contConsultaCrearCuenta.appendChild(botonCrearCuentaNo);
+botonCrearCuentaNo.addEventListener("click", () => {
+    consultaCrearCuenta.remove();
+    botonCrearCuentaSi.remove();
+    botonCrearCuentaNo.remove();
+    contIngresoSinCuenta.style.display = "flex";
+})
+
+contMain.appendChild(contConsultaCrearCuenta);
+
+// ################# CONTENEDOR INGRESO SIN CREAR CUENTA ###################### //
+const contIngresoSinCuenta = document.createElement("div");
+contIngresoSinCuenta.style.display = "none";
+contIngresoSinCuenta.style.flexDirection = "column";
+contIngresoSinCuenta.style.alignItems = "center";
+
+// ---------------------- MENSAJE CUENTA NO CREADA --------------------------- //
+const mensajeIngresoSinCuenta = document.createElement("p");
+mensajeIngresoSinCuenta.textContent = "De acuerdo, puede ingresar para ver nuestros productos.";
+mensajeIngresoSinCuenta.style.marginBottom = "50px";
+contIngresoSinCuenta.appendChild(mensajeIngresoSinCuenta);
+
+// ---------------------------- BOTON ACEPTAR -------------------------------- //
+const botonAceptarSinCuenta = document.createElement("button");
+botonAceptarSinCuenta.textContent = "Aceptar";
+contIngresoSinCuenta.appendChild(botonAceptarSinCuenta);
+
+botonAceptarSinCuenta.addEventListener("click", () =>{
+    mensajeIngresoSinCuenta.remove();
+    botonAceptarSinCuenta.remove();
+    //ENTRAR A AL CONTENEDOR DONDE SE ENCUENTRAN LOS PRODUCTOS.
+})
+
+contMain.appendChild(contIngresoSinCuenta);
+
+// ######################## CONTENEDOR CREAR CUENTA ######################### //
+const contCrearCuenta = document.createElement("div");
+contCrearCuenta.style.display = "none";
+contCrearCuenta.style.flexDirection = "column";
+contCrearCuenta.style.alignItems = "center";
+
+// ---------------------------- CREAR CUENTA -------------------------------- //
+const labelNombre = document.createElement("label");
+labelNombre.textContent = "Nombre";
+const inputNombre = document.createElement("input");
+inputNombre.type = "text";
+inputNombre.style.marginBottom = "10px";
+inputNombre.style.width = "300px";
+
+const labelApellido = document.createElement("label");
+labelApellido.textContent = "Apellido";
+const inputApellido = document.createElement("input");
+inputApellido.type = "text";
+inputApellido.style.marginBottom = "10px";
+inputApellido.style.width = "300px";
+
+const labelDNI = document.createElement("label");
+labelDNI.textContent = "DNI";
+const inputDNI = document.createElement("input");
+inputDNI.type = "text";
+inputDNI.style.marginBottom = "10px";
+inputDNI.style.width = "300px";
+
+const labelDireccion = document.createElement("label");
+labelDireccion.textContent = "Direccion";
+const inputDireccion = document.createElement("input");
+inputDireccion.type = "text";
+inputDireccion.style.marginBottom = "10px";
+inputDireccion.style.width = "300px";
+
+const labelCp = document.createElement("label");
+labelCp.textContent = "CP";
+const inputCp = document.createElement("input");
+inputCp.type = "text";
+inputCp.style.marginBottom = "10px";
+inputCp.style.width = "300px";
+
+const labelLocalidad = document.createElement("label");
+labelLocalidad.textContent = "Localidad";
+const inputLocalidad = document.createElement("input");
+inputLocalidad.type = "text";
+inputLocalidad.style.marginBottom = "10px";
+inputLocalidad.style.width = "300px";
+
+contCrearCuenta.appendChild(labelNombre);
+contCrearCuenta.appendChild(inputNombre);
+contCrearCuenta.appendChild(labelApellido);
+contCrearCuenta.appendChild(inputApellido);
+contCrearCuenta.appendChild(labelDNI);
+contCrearCuenta.appendChild(inputDNI);
+contCrearCuenta.appendChild(labelDireccion);
+contCrearCuenta.appendChild(inputDireccion);
+contCrearCuenta.appendChild(labelCp);
+contCrearCuenta.appendChild(inputCp);
+contCrearCuenta.appendChild(labelLocalidad);
+contCrearCuenta.appendChild(inputLocalidad);
+
+
+
+// --------------------------- BOTON REGISTRAR ------------------------------ //
+const botonRegistrar = document.createElement("button");
+botonRegistrar.textContent = "Registrar";
+contCrearCuenta.appendChild(botonRegistrar);
+
+const usuariosRegistrados = [];
+
+botonRegistrar.addEventListener("click", () => {
+    const nombre = inputNombre.value;
+    const apellido = inputApellido.value;
+    const dni = inputDNI.value;
+    const direccion = inputDireccion.value;
+    const cp = inputCp.value;
+    const localidad = inputLocalidad.value;
+
+    if (nombre && apellido && dni && direccion && cp && localidad) {
         const nuevoUsuario = {
-            id: clientes.length + 1,
-            dni: prompt("Ingrese el DNI del cliente:"),
-            nombre: prompt("Ingrese el nombre del cliente:"),
-            apellido: prompt("Ingrese el apellido del cliente:"),
-            telefono: prompt("Ingrese el teléfono del cliente:"),
-            direccion: prompt("Ingrese la dirección del cliente:"),
-            localidad: prompt("Ingrese la localidad del cliente:")
+            nombre: nombre,
+            apellido: apellido,
+            dni: dni,
+            direccion: direccion,
+            cp: cp,
+            localidad: localidad
         };
-        clientes.push(nuevoUsuario);
-        alert("Usuario generado con exito!");
-    }
 
-    // ------------------------------------------ //
-    // El sistema inicia sin usuarios pre-registrados. Tras crear un nuevo usuario, el sistema verifica su existencia. 
-    // Si la creación fue exitosa, el sistema permite el acceso utilizando el número de DNI del usuario registrado.
-    alert("Bienvenidos a Genesis2815 Store")
-    while(true){
-        cuantaUsuarioExistente = prompt("Tiene cuenta en nuestra tienda? SI / NO")
-        if (cuantaUsuarioExistente && cuantaUsuarioExistente.toUpperCase() === "SI"){
-            dniUsuario = prompt("Ingrese su numero de DNI:")
-            usuarioEncontrado = consultarUsuario(dniUsuario, clientes)
-            if (usuarioEncontrado){
-                alert("Ingreso exitoso.")
-                estadoUsuario = true
-                break
-            }
-            else{
-                alert("El numero de dni es incorrecto o no se encuentra registrado en nuestra base de datos")
-            }
-        }
-        else if (cuantaUsuarioExistente && cuantaUsuarioExistente.toUpperCase() === "NO"){
-            consultaRegistro = prompt("Quiere generar un usuario? SI / NO")
-            if (consultaRegistro && consultaRegistro.toUpperCase() === "SI"){
-                alert("Vamos a solicitarle algunos datos para generar el usuario.")
-                agregarUsuario()
-            }
-            else if (consultaRegistro && consultaRegistro.toUpperCase() === "NO"){
-                alert("Procedemos sin generear un usuario.")
-                estadoUsuario = false
-                break
-            }
-            else{
-                alert("La opcion ingresada es incorrecta")
-            }
-        }
-        else{
-            alert("La opcion ingresada es incorrecta")
-        }
-    }
+        usuariosRegistrados.push(nuevoUsuario);
+        console.log("Usuario registrado:", nuevoUsuario);
 
-    // ------------------------------------------ //
-    alert("Estos son los productos que actualmente tenemos en stock")
-    while(estadoPrograma){
-        const listaProductos = ["1   - Vaso Quencher 1.18Lt Stanley", 
-                                "2   - Termo System 1Lt", 
-                                "3   - Termo Polar 1Lt",
-                                "4   - Termo Classic 1.3 Lt",
-                                "5   - Go Flip 800 ml",
-                                "6   - Flip Straw 650 ml",
-                                "7   - Vaso Beer Pint 437 ml",
-                                "8   - Mate Stanley 236 ml",
-                                "9   - Bombilla Mate Stanley",
-                                "10  - Vaso Coffee 473 ml"]
-        let mensajeProductos = "";
-        for (let i = 0; i < listaProductos.length; i++) {
-        mensajeProductos += listaProductos[i] + "\n"; 
-        }
-        alert(mensajeProductos);
-        numeroIngresado = prompt("Para consultar el precio indique el numero de producto");
-        if (numeroIngresado){
-            switch (numeroIngresado){
-                case "1":
-                    alert("$71.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Vaso Quencher 1.18Lt Stanley", Total: (71500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "2":
-                    alert("$81.000")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Termo System 1Lt", Total: (81000*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "3":
-                    alert("$65.000")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Termo Polar 1Lt", Total: (65000*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "4":
-                    alert("$63.000")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Termo Classic 1.3 Lt", Total: (63000*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "5":
-                    alert("$42.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Go Flip 800 ml", Total: (42500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "6":
-                    alert("$42.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Flip Straw 650 ml", Total: (42500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "7":
-                    alert("$35.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Vaso Beer Pint 437 ml", Total: (35500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "8":
-                    alert("$33.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Mate Stanley 236 ml", Total: (33500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "9":
-                    alert("$29.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Bombilla Mate Stanley", Total: (29500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-                case "10":
-                    alert("$25.500")
-                    agregarProducto = prompt("Quiere agregarlo al carrito de compra? SI / NO")
-                    if (agregarProducto && agregarProducto.toUpperCase() === "SI" && estadoUsuario == true){
-                        cantidadProducto = parseInt(prompt("ingrese cantidad."))
-                        carritoCompras.push({Cantidad: cantidadProducto, Producto: "Vaso Coffee 473 ml", Total: (25500*cantidadProducto)})
-                        break
-                    }
-                    else if (agregarProducto && agregarProducto.toUpperCase() === "NO"){
-                        break
-                    }
-                    else if (estadoUsuario == false){
-                        alert("Debe ingresar con su usuario para agregar un producto al carrito")
-                        break
-                    }
-                    else{
-                        alert("La opcion ingresada no es correcta")
-                        break
-                    }
-            }
-        }
-        else{
-            alert("La opcion ingresada es incorrecta")
-        }
-    // ---------------------------------------------- //
+        contCrearCuenta.innerHTML = '';
+        contCrearCuenta.style.display = "none";
 
-        consulta = prompt("Quiere consultar por otro producto? SI / NO");
-        if (consulta && consulta.toUpperCase() === "SI") {
-            estadoPrograma = true
-        } 
-        else if (consulta && consulta.toUpperCase() === "NO"){
-            estadoPrograma = false
-        }
-        else {
-            alert("La opcion ingresada no es correcta")
-        }
-    }
-    // ---------------------------------------------- //
+        const mensajeRegistro = document.createElement("p");
+        mensajeRegistro.textContent = "Registro Exitoso!";
+        contCrearCuenta.appendChild(mensajeRegistro);
 
-    if (carritoCompras.length > 0) {
-        let mensajeCompleto = "";
-        for (let i = 0; i < carritoCompras.length; i += 1) {
-            const detalleCompra = carritoCompras[i]
-            mensajeCompleto += `
-                Cantidad: ${detalleCompra.Cantidad} || Producto: ${detalleCompra.Producto} || Total: $ ${detalleCompra.Total}
-            `
-        }
-        alert(mensajeCompleto)
-        for (let i = 0; i < carritoCompras.length; i += 1) {
-            totalCompra += carritoCompras[i].Total
-        }
-        alert("El total de la compra es: $ " + totalCompra)
-        alert("El pedido se ha generado con exito")
-        for (let i = 0; i < clientes.length; i += 1){
-            const datosCliente = clientes[i]
-            const mensaje = `
-                ID: ${datosCliente.id}
-                DNI: ${datosCliente.dni}
-                Nombre: ${datosCliente.nombre}
-                Apellido: ${datosCliente.apellido}
-                Telefono: ${datosCliente.telefono}
-                Direccion: ${datosCliente.direccion}
-                Localidad: ${datosCliente.localidad}
-            `;
-            alert("Datos para el envio:\n" + mensaje)
-        }
-        alert("Gracias por su Compra");
+        const botonAceptarRegistro = document.createElement("button");
+        botonAceptarRegistro.textContent = "Aceptar";
+        contCrearCuenta.appendChild(botonAceptarRegistro);
+
+        contCrearCuenta.style.display = "flex";
+
+        botonAceptarRegistro.addEventListener("click", () => {
+            mensajeRegistro.remove();
+            botonAceptarRegistro.remove();
+            contCrearCuenta.style.display = "none";
+            
+        });
     } else {
-        alert("Gracias por su visita");
+        alert("Por favor, completa todos los campos del formulario.");
     }
-}
 
-generadorPedido()
+});
 
-
-
+contMain.append(contCrearCuenta);
 
 
+// ######################### CONTENEDOR CUENTA SI ########################### //
+const contCuentaCreada = document.createElement("div");
+contCuentaCreada.style.display = "none";
+contCuentaCreada.style.flexDirection = "column";
+contCuentaCreada.style.alignItems = "center";
 
+// --------------------- INGRESO A LA CUENTA CON DNI ------------------------ //
+const labelDniLogin = document.createElement("label");
+labelDniLogin.textContent = "Numero DNI (Sin puntos)";
+labelDniLogin.style.marginBottom = "10px";
+const inputDniLogin = document.createElement("input");
+inputDniLogin.type = "text";
+inputDniLogin.style.marginBottom = "40px";
+contCuentaCreada.appendChild(labelDniLogin);
+contCuentaCreada.appendChild(inputDniLogin);
 
+// ------------------------ BOTON INGRESAR CUENTA --------------------------- //
+const botonIngresarCuenta = document.createElement("button");
+botonIngresarCuenta.textContent = "Ingresar";
+contCuentaCreada.appendChild(botonIngresarCuenta);
 
+botonIngresarCuenta.addEventListener("click", () => {
+    const dniIngresadoLogin = inputDniLogin.value;
+    let usuarioEncontrado = null;
 
+    for (const usuario of usuariosRegistrados) {
+        if (usuario.dni === dniIngresadoLogin) {
+            usuarioEncontrado = usuario;
+            break;
+        }
+    }
+    if (usuarioEncontrado) {
+        labelDniLogin.remove();
+        inputDniLogin.remove();
+        botonIngresarCuenta.remove();
+        alert(`¡Bienvenido/a, ${usuarioEncontrado.nombre} ${usuarioEncontrado.apellido}!`);
+    } else {
+        alert("DNI no registrado. Por favor, verifica el número.");
+    }
+});
 
-
-
-
+contMain.appendChild(contCuentaCreada);
