@@ -1,0 +1,19 @@
+.producto {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.producto img {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+#carrito {
+  border-top: 2px solid #444;
+  margin-top: 20px;
+  padding-top: 10px;
+}

@@ -1,0 +1,40 @@
+
+[
+  {
+    "id": 1,
+    "title": "Laptop Dell Inspiron 15",
+    "price": 85000,
+    "image": "img/LaptopDellInspiron15.png"
+  },
+  {
+    "id": 2,
+    "title": "Auriculares Sony WH-1000XM4",
+    "price": 32000,
+    "image": "img/AuricularesSonyWH1000XM4.png"
+  },
+  {
+    "id": 3,
+    "title": "Smartphone Samsung Galaxy S21",
+    "price": 70000,
+    "image": "img/SmartphoneSamsungGalaxyS21.png"
+  },
+  {
+    "id": 4,
+    "title": "Cargador Inalámbrico Anker",
+    "price": 4500,
+    "image": "img/CargadorInalámbricoAnker.png"
+  },
+  {
+    "id": 5,
+    "title": "Tablet Apple iPad Air",
+    "price": 55000,
+    "image": "img/TabletAppleiPadAir.png"
+  },
+  {
+    "id": 6,
+    "title": "Smartwatch Garmin Forerunner 245",
+    "price": 24000,
+    "image": "img/SmartwatchGarminForerunner245.png"
+  }
+]
+            
